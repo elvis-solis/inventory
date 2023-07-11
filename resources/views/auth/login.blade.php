@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Inventory | Login</title>
+	@include('include.header') <!-- Incluye el encabezado desde el archivo 'include.header'. -->
+</head>
+<body class="login-page">
+    <div class="login-box">
+        <div class="logo">
+            <a href="javascript:void(0);"><img class="img-fluid" src="{{ url('images/logo.png') }}" alt="inventory logo"> </a>
+            <!-- <small>A Inventory Softwaare</small> -->
+        </div>
+        <div class="card">
+            <div class="body">
+                <form id="sign_in" method="POST" action="{{ route('login') }}">
+                	  {{ csrf_field() }} <!-- Genera un campo oculto con un token CSRF para proteger el formulario contra ataques CSRF. -->
+                    <div class="msg">Iniciar sesión</div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">person</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" class="form-control" name="email" placeholder="Correo electrónico" required autofocus> <!-- Campo de entrada para el correo electrónico. -->
+                        </div>
+                           @if ($errors->has('email')) <!-- Comprueba si hay errores en el campo de correo electrónico. -->
+                                    <span class="help-block"> <!-- Muestra un mensaje de error. -->
+                                        <strong>{{ $errors->first('email') }}</strong> <!-- Muestra el primer error del campo de correo electrónico. -->
+                                    </span>
+                                @endif
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">lock</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="password" class="form-control" name="password" placeholder="Contraseña" required> <!-- Campo de entrada para la contraseña. -->
+                               @if ($errors->has('password')) <!-- Comprueba si hay errores en el campo de contraseña. -->
+                                    <span class="help-block"> <!-- Muestra un mensaje de error. -->
+                                        <strong>{{ $errors->first('password') }}</strong> <!-- Muestra el primer error del campo de contraseña. -->
+                                    </span>
+                                @endif
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8 p-t-5">
+                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} id="rememberme" class="filled-in chk-col-pink"> <!-- Campo de selección para recordar el inicio de sesión. -->
+                            <label for="rememberme">Recuérdame</label>
+                        </div>
+                        <div class="col-xs-4">
+                            <button class="btn btn-block bg-pink waves-effect" type="submit">Ingresar</button> <!-- Botón para enviar el formulario. -->
+                        </div>
+                    </div>
+                    <div class="row m-t-15 m-b--20">
+                        <div class="col-xs-6">
+                            <!-- <a href="sign-up.html">Register Now!</a> --> <!-- Enlace para registrarse. -->
+                        </div>
+                        <!--<div class="col-xs-6 align-right">
+                            <a href="href="{{ route('password.request') }}"">¿Olvidaste tu contraseña?</a> --> <!-- Enlace para restablecer la contraseña. -->
+                        </div>-->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+@include('include.footer') <!-- Incluye el pie de página desde el archivo 'include.footer'. -->
+</body>
+</html>
